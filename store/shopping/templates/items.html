@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/items.css' %}">
+<title> Items </title>
+{% endblock %}
+
+{% block body %}
+<div class="d-flex flex-row justify-content-center">
+  <table class="table w-auto margin-div">
+  <thead>
+    <tr>
+      <th scope="col">Items</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in object_list %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>{{ item.price }}€</td>
+      <td><input type='number' placeholder='1'></td>
+      <td><button type="button" class="btn btn-outline-primary">Add to basket</button></td>
+    </tr>
+</div>
+   
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

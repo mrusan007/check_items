@@ -1,0 +1,26 @@
+# fixture for items model
+- model: shopping.items
+  pk: 1
+  fields:
+    name: Smart Hub
+    price: 34.66
+- model: shopping.items
+  pk: 2
+  fields:
+    name: Wireless Camera
+    price: 54.06
+- model: shopping.items
+  pk: 3
+  fields:
+    name: Thermal Camera
+    price: 154.16
+- model: shopping.items
+  pk: 4
+  fields:
+    name: Motion Sensor
+    price: 24.56
+- model: shopping.items
+  pk: 5
+  fields:
+    name: Smoke Sensor
+    price: 74.88
