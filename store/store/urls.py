@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from shopping.views import ItemsListView
+from shopping.views import ItemsListView, CheckOut
 
 urlpatterns = [
-    path('', ItemsListView.as_view()),
+    path('', ItemsListView.as_view(), name='index'),
+    path('order/', CheckOut.as_view(), name='checkout'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

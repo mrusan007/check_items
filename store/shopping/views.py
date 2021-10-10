@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from shopping.models import Items
 
 # Create your views here.
@@ -12,3 +12,8 @@ class ItemsListView(ListView):
 
 
 
+class CheckOut(TemplateView):
+    '''
+    Check out items, make an order.
+    '''
+    template_name = 'check_out.html'

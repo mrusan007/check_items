@@ -1,71 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/items.css' %}">
-<title> Items </title>
-
 <script>
-
-var item_dict = {};
-window.onload = function () {
- new Vue ({
-   el: '#check-in',
-   delimiters: ['[[',']]'],
-   data: {
-     sum: 0,
-     item_dict: {},
-   },
-   
-   methods:{
-
-     get_items(){
-       let name = event.target.name;
-       
-       let names = document.getElementsByName(name);
-       
-       
-       if(isNaN(parseInt(names[1].value))){
-         alert('Only numbers are allowed');
-       }
-       else{
-        item_dict[name] = {};
-        item_dict[name]['price'] = names[0].innerText;
-        item_dict[name]['quantity'] = names[1].value;
-        
-        let temp_sum = 0;
-        for (var keys of Object.keys(item_dict))
-        {
-          temp_sum += parseInt(item_dict[keys]['quantity']);
-        }
-        this.sum = temp_sum;
-        this.save_items();
-       }
-
-     },
-
-     save_items(){
-       const parsed = JSON.stringify(item_dict);
-       localStorage.setItem('items', parsed);
-     }
-       
-     },
-
-
-     
- })
-
- 
-}
-
-
-
+console.log(localStorage.getItem('items'));
 </script>
 
 {% endblock %}
 
 {% block body %}
 
-<div id="check-in">
+<div id="check-out">
  <ul class="nav justify-content-center">
   
   <li class="nav-item">
@@ -73,7 +18,7 @@ window.onload = function () {
   
     <a class="btn btn-outline-primary navs-link" href="#" role="button" title="To the checkout!"> <svg xmlns="http://www.w3.org/2000/svg" style='padding-top: 5px;'width="55" height="55" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
       <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
-        </svg>|[[ sum ]]|</a>
+        </svg></a>
     
     
   </li>
@@ -93,7 +38,7 @@ window.onload = function () {
   {% for item in object_list %}
     <tr>
       <td>{{ item.name }}</td>
-      <td name='{{ item.name }}'>{{ item.price }}€</td>
+      <td>{{ item.price }}€</td>
       <td><input class="text-center form-control-inline" type="number" min='1' name='{{ item.name }}'></td>
       <td><button v-on:click="get_items()" type="button" class="btn btn-outline-primary" name='{{ item.name }}'>Add to basket</button></td>
     </tr>
