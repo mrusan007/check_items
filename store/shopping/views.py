@@ -9,3 +9,6 @@ class ItemsListView(ListView):
     '''
     model = Items
     template_name = 'items.html'
+
+
+

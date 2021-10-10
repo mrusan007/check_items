@@ -3,9 +3,61 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/items.css' %}">
 <title> Items </title>
+
+<script>
+var item_dict = {};
+
+window.onload = function () {
+ new Vue ({
+   el: '#check-in',
+   delimiters: ['[[',']]'],
+   data: {
+     sum: 0,
+   },
+   
+   methods:{
+     get_items(){
+       let name = event.target.name;
+       
+       let names = document.getElementsByName(name);
+       console.log(isNaN(names[0].value));
+       if(isNaN(parseInt(names[0].value))){
+         alert('Only numbers are allowed');
+       }
+       else{
+        item_dict[name] = names[0].value;
+        this.sum += parseInt(names[0].value);
+       }
+       
+     },
+     
+ })
+
+ 
+}
+
+
+
+</script>
+
 {% endblock %}
 
 {% block body %}
+
+<div id="check-in">
+ <ul class="nav justify-content-center">
+  
+  <li class="nav-item">
+
+  
+    <a class="btn btn-outline-primary navs-link" href="#" role="button" title="To the checkout!"> <svg xmlns="http://www.w3.org/2000/svg" style='padding-top: 5px;'width="55" height="55" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
+      <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+        </svg>|[[ sum ]]|</a>
+    
+    
+  </li>
+
+</ul>
 <div class="d-flex flex-row justify-content-center">
   <table class="table w-auto margin-div">
   <thead>
@@ -21,12 +73,20 @@
     <tr>
       <td>{{ item.name }}</td>
       <td>{{ item.price }}€</td>
-      <td><input type='number' placeholder='1'></td>
-      <td><button type="button" class="btn btn-outline-primary">Add to basket</button></td>
+      <td><input class="text-center form-control-inline" type="number" min='1' name='{{ item.name }}' v-model='qunt' @input='validate_number()'></td>
+      <td><button v-on:click="get_items()" type="button" class="btn btn-outline-primary" name='{{ item.name }}'>Add to basket</button></td>
     </tr>
-</div>
+
    
     {% endfor %}
   </tbody>
 </table>
+
+</div>
+</div>
+
+
+
+   
+  
 {% endblock %}
