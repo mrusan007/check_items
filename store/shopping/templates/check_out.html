@@ -3,7 +3,22 @@
 
 {% block head %}
 <script>
-console.log(localStorage.getItem('items'));
+window.onload = function () {
+ const app = new Vue ({
+   el: '#check-out',
+   delimiters: ['[[',']]'],
+   data: {
+     item_dict: JSON.parse(localStorage.getItem('items')),
+   },
+   methods:{
+     print_out(){
+       console.log(typeof(this.item_dict));
+     }
+   }
+ })
+ app.print_out();
+}
+
 </script>
 
 {% endblock %}
@@ -35,16 +50,15 @@ console.log(localStorage.getItem('items'));
     </tr>
   </thead>
   <tbody>
-  {% for item in object_list %}
+  
+  <template v-for="item in item_dict">
     <tr>
-      <td>{{ item.name }}</td>
-      <td>{{ item.price }}€</td>
-      <td><input class="text-center form-control-inline" type="number" min='1' name='{{ item.name }}'></td>
-      <td><button v-on:click="get_items()" type="button" class="btn btn-outline-primary" name='{{ item.name }}'>Add to basket</button></td>
+      <td>[[ item.price ]]</td>
+      <td>k</td>
+      <td></td>
+      <td><button>Add to basket</button></td>
     </tr>
-
-   
-    {% endfor %}
+  </template>
   </tbody>
 </table>
 
