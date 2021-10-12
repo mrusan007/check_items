@@ -24,3 +24,20 @@
   fields:
     name: Smoke Sensor
     price: 74.88
+
+# fixture for promotions
+- model: shopping.promotions
+  pk: 1
+  fields:
+    name: 20%OFF
+    can_combine: False
+- model: shopping.promotions
+  pk: 2
+  fields:
+    name: 5%OFF
+    can_combine: True
+- model: shopping.promotions
+  pk: 3
+  fields:
+    name: 20EUROFF
+    can_combine: True

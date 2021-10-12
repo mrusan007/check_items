@@ -13,6 +13,7 @@ class Promotions(models.Model):
     Promotions for our store.
     '''
     name = models.CharField(max_length=256, null=False)
+    can_combine = models.BooleanField()
 
 class ItemsQuantity(models.Model):
     '''
@@ -25,5 +26,6 @@ class Order(models.Model):
     '''
     Order from our customer.
     '''
+    user_address = models.CharField(max_length=256, null=False)
     item_quantity = models.ManyToManyField(ItemsQuantity)
     promotions = models.ManyToManyField(Promotions)
